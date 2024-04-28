@@ -1,21 +1,30 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { Activity } from './schema/activity.schema';
+import { CreateActivityDTO } from './dto/create-activity.dto';
 
 @Controller('activity')
 export class ActivityController {
   constructor(private activityService: ActivityService) {}
 
   @Get()
-  async getAllBooks(): Promise<Activity[]> {
+  async getAllActivities(): Promise<Activity[]> {
     return this.activityService.findAll();
   }
 
   @Post()
-  async createBook(
+  async createActivity(
     @Body()
-    activity,
+    activity: CreateActivityDTO,
   ): Promise<Activity> {
     return this.activityService.create(activity);
+  }
+
+  @Get(":id")
+  async getActivity(
+    @Param("id")
+    id: string,
+  ): Promise<Activity> {
+    return this.activityService.findById(id);
   }
 }
