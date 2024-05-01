@@ -28,4 +28,15 @@ export class ActivityService {
     }
     return activity;
   }
+
+  async updateById(id: string, activity: Activity): Promise<Activity> {
+    return await this.activityModel.findByIdAndUpdate(id, activity, {
+      new: true,
+      runValidators: true,
+    });
+  }
+
+  async deleteById(id: string): Promise<Activity> {
+    return await this.activityModel.findByIdAndDelete(id);
+  }
 }

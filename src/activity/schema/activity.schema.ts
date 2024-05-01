@@ -5,7 +5,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 })
 export class Activity {
   @Prop()
-  workingHours: boolean;
+  workingHours: number;
 
   @Prop()
   commits: number;
